@@ -10,6 +10,24 @@
   "categories": [
     "Other"
   ],
+  "keywords": [
+    "midi",
+    "music",
+    "audio",
+    "piano roll",
+    "daw",
+    "sequencer",
+    "editor"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/a5af/VSCode-MIDI-Editor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/a5af/VSCode-MIDI-Editor/issues"
+  },
+  "homepage": "https://github.com/a5af/VSCode-MIDI-Editor#readme",
   "activationEvents": [
     "onCustomEditor:midiEditor.editor"
   ],
@@ -44,12 +62,13 @@
     "test": "npm run test:webview && npm run test:extension",
     "test:webview": "vitest run",
     "test:webview:watch": "vitest",
-    "test:extension": "node ./dist/test/runTests.js",
+    "test:extension": "node ./dist/test/test/runTests.js",
     "pretest:extension": "npm run build:extension && tsc -p ./tsconfig.test.json"
   },
   "devDependencies": {
     "@solidjs/testing-library": "^0.8.5",
     "@testing-library/jest-dom": "^6.1.5",
+    "@types/glob": "^8.1.0",
     "@types/mocha": "^10.0.6",
     "@types/node": "^20.10.0",
     "@types/vscode": "^1.85.0",
