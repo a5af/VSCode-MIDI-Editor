@@ -1,0 +1,75 @@
+{
+  "name": "vscode-midi-editor",
+  "displayName": "MIDI Editor",
+  "description": "Full-featured MIDI editor with piano roll, playback, and DAW-like editing capabilities",
+  "version": "0.1.0",
+  "publisher": "vscode-midi-editor",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCustomEditor:midiEditor.editor"
+  ],
+  "main": "./dist/extension/extension.js",
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "midiEditor.editor",
+        "displayName": "MIDI Editor",
+        "selector": [
+          {
+            "filenamePattern": "*.mid"
+          },
+          {
+            "filenamePattern": "*.midi"
+          }
+        ],
+        "priority": "default"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "npm run build:extension && npm run build:webview",
+    "build:extension": "esbuild src/extension/extension.ts --bundle --outfile=dist/extension/extension.js --external:vscode --format=cjs --platform=node --minify",
+    "build:webview": "vite build",
+    "dev": "npm run dev:extension & npm run dev:webview",
+    "dev:extension": "esbuild src/extension/extension.ts --bundle --outfile=dist/extension/extension.js --external:vscode --format=cjs --platform=node --sourcemap --watch",
+    "dev:webview": "vite",
+    "package": "vsce package",
+    "watch": "npm run dev",
+    "test": "npm run test:webview && npm run test:extension",
+    "test:webview": "vitest run",
+    "test:webview:watch": "vitest",
+    "test:extension": "node ./dist/test/runTests.js",
+    "pretest:extension": "npm run build:extension && tsc -p ./tsconfig.test.json"
+  },
+  "devDependencies": {
+    "@solidjs/testing-library": "^0.8.5",
+    "@testing-library/jest-dom": "^6.1.5",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.15.0",
+    "@typescript-eslint/parser": "^6.15.0",
+    "@vscode/test-electron": "^2.3.8",
+    "@vscode/vsce": "^2.22.0",
+    "esbuild": "^0.19.10",
+    "eslint": "^8.56.0",
+    "jsdom": "^23.0.1",
+    "mocha": "^10.2.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10",
+    "vite-plugin-solid": "^2.10.0",
+    "vitest": "^1.1.0"
+  },
+  "dependencies": {
+    "@tonejs/midi": "^2.0.28",
+    "nanoid": "^5.0.4",
+    "solid-js": "^1.8.11",
+    "tone": "^15.0.4"
+  }
+}
